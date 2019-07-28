@@ -13,6 +13,15 @@ async function _cars(ids) {
 }
 
 module.exports = {
+
+    car: async (args) => {
+        const car = await carModel.findOne(args);
+        return {
+            ...car._doc,
+            manufacturer: _manufacturer.bind(this, car.manufacturer)
+        };
+    },
+
     cars: async () => {
         const cars = await carModel.find({});
         return cars.map(car => {
@@ -22,10 +31,17 @@ module.exports = {
             }
         })
     },
+
     manufacturers: async () => {
         const manufacturers = await manufacturerModel.find({});
-        return manufacturers.map(async manufacture => await _manufacturer(manufacture._id));
+        return manufacturers.map(async manufacture => {
+            return {
+                ...manufacture._doc,
+                cars: _cars.bind(this, manufacture.cars)
+            }
+        });
     },
+
     createCar: async (args) => {
         const findManufacturer = await manufacturerModel.findOne({ name: args.car.manufacturer });
         if (!findManufacturer) {
@@ -41,6 +57,7 @@ module.exports = {
         newCar.manufacturer = findManufacturer;
         return newCar;
     },
+
     createManufacturer: async (args) => {
         const newManufacturer = await manufacturerModel.create(args.manufacturer)
         return newManufacturer;

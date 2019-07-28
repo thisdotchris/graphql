@@ -11,7 +11,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use(
-    '/api',
+    '/api/v1',
     expressGraphql({
         schema: graphqlSchema,
         rootValue: graphqlResolver,
