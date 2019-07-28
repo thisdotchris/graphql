@@ -7,18 +7,21 @@ module.exports = buildSchema(
             model: String!
             color: String!
             transmission: String!
+            manufacturer: Manufacturer!
         }
 
         type Manufacturer {
             _id: ID
             name: String!
             country: String
+            cars: [Car!]
         }
 
         input CarInput {
             model: String!
             color: String!
             transmission: String!
+            manufacturer: String!
         }
 
         input ManufacturerInput {
