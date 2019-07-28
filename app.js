@@ -31,8 +31,8 @@ const connect = `mongodb+srv://test_user:pZp9DrsfwtNyVWfw@cluster0-z4g3b.mongodb
 mongoose.connect(connect, { useNewUrlParser: true })
     .then(() => {
         console.log(`mongoose connection OK.`);
-        app.listen(8080, () => {
-            console.log(`server listen on port 8080`);
+        app.listen(80, () => {
+            console.log(`server running`);
         });
     })
     .catch(error => console.error(error));
