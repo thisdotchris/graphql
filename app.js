@@ -19,9 +19,16 @@ app.use(
     })
 )
 
+app.use(
+    '/',
+    (req, res, next) => {
+        res.send({ message: 'api running' });
+    }
+)
+
 const connect = `mongodb+srv://test_user:pZp9DrsfwtNyVWfw@cluster0-z4g3b.mongodb.net/test?retryWrites=true&w=majority`;
 
-mongoose.connect(connect, {useNewUrlParser: true})
+mongoose.connect(connect, { useNewUrlParser: true })
     .then(() => {
         console.log(`mongoose connection OK.`);
         app.listen(8080, () => {
