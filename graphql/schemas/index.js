@@ -31,7 +31,7 @@ module.exports = buildSchema(
 
         type RootQuery {
             cars: [Car!]!
-            car(model: String!): Car
+            car(model: String!): Car!
             manufacturers: [Manufacturer!]!
         }
 
